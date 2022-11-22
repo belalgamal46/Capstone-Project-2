@@ -10,7 +10,7 @@ const displayMovies = async (list, title = '') => {
   const categoryTitle = document.querySelector('.title');
   categoryTitle.innerHTML = title;
   moviesList.innerHTML = '';
-  data.map((movie) => {
+  data.forEach((movie) => {
     moviesList.innerHTML += `
     <li>
       <div class="image-container">
@@ -47,6 +47,8 @@ genres.forEach((item) => {
       case 'animation':
         displayMovies(getGenres(16), 'Animations');
         break;
+      default:
+        displayMovies(getTrendingMovies(), 'Trending');
     }
   });
 });
