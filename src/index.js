@@ -1,8 +1,8 @@
 import './styles.css';
 import { getTrendingMovies } from './api.js';
 
-const displayMovies = async () => {
-  const data = await getTrendingMovies();
+const displayMovies = async (list) => {
+  const data = await list;
   const moviesList = document.querySelector('.movies-list');
   moviesList.innerHTML = '';
   console.log(data);
@@ -27,4 +27,6 @@ const displayMovies = async () => {
   });
 };
 
-document.addEventListener('DOMContentLoaded', displayMovies);
+document.addEventListener('DOMContentLoaded', () => {
+  displayMovies(getTrendingMovies());
+});
