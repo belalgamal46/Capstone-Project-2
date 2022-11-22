@@ -1,3 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@300;400;600;800&display=swap');
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: aquamarine;
+  font-family: 'Poppins', sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+nav {
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 70px;
+  cursor: pointer;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 100px;
+}
+
+.genres {
+  cursor: pointer;
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 50px;
+  list-style: none;
+}
+
+.image-container {
+  text-align: center;
+}
+
+.movie-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 15px 0;
+}
+
+.movie-title-container h2 {
+  font-size: 1rem;
+}
+
+.like-btn {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  cursor: pointer;
+}
+
+.comments-btn {
+  padding: 7px;
+  background-color: transparent;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.comments-btn:hover {
+  background-color: #000;
+  color: white;
+}
+
+.title {
+  font-size: 2.5rem;
 }
