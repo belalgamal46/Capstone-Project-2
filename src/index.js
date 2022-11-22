@@ -4,11 +4,12 @@ import { getTrendingMovies, getGenres } from './api.js';
 const genres = document.querySelectorAll('.genres');
 const logo = document.querySelector('.logo');
 
-const displayMovies = async (list) => {
+const displayMovies = async (list, title = '') => {
   const data = await list;
   const moviesList = document.querySelector('.movies-list');
+  const categoryTitle = document.querySelector('.title');
+  categoryTitle.innerHTML = title;
   moviesList.innerHTML = '';
-  console.log(data);
   data.map((movie) => {
     moviesList.innerHTML += `
     <li>
@@ -31,25 +32,25 @@ const displayMovies = async (list) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  displayMovies(getTrendingMovies());
+  displayMovies(getTrendingMovies(), 'Trending');
 });
 
-genres.forEach(item => {
-    item.addEventListener('click', () => {
-        switch(item.id) {
-            case 'action':
-                displayMovies(getGenres(28));
-              break;
-            case 'comedy':
-                displayMovies(getGenres(35));
-              break;
-              case 'animation':
-                displayMovies(getGenres(16));
-              break;
-          }
-    })
+genres.forEach((item) => {
+  item.addEventListener('click', () => {
+    switch (item.id) {
+      case 'action':
+        displayMovies(getGenres(28), 'Action Movies');
+        break;
+      case 'comedy':
+        displayMovies(getGenres(35), 'Comedy Movies');
+        break;
+      case 'animation':
+        displayMovies(getGenres(16), 'Animations');
+        break;
+    }
+  });
 });
 
 logo.addEventListener('click', () => {
-    displayMovies(getTrendingMovies());
-}) 
+  displayMovies(getTrendingMovies(), 'Trending');
+});

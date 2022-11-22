@@ -67,6 +67,10 @@ nav li {
   margin: 10px 0 15px 0;
 }
 
+.movie-title-container h2 {
+  font-size: 1rem;
+}
+
 .like-btn {
   background-color: transparent;
   border: none;
@@ -88,4 +92,8 @@ nav li {
 .comments-btn:hover {
   background-color: #000;
   color: white;
+}
+
+.title {
+  font-size: 2.5rem;
 }
