@@ -12,6 +12,10 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+img {
+  max-width: 100%;
+}
+
 .container {
   max-width: 85%;
   margin: 0 auto;
@@ -40,18 +44,15 @@ nav li {
 
 .movies-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 200px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
   width: 100%;
+  margin-top: 50px;
   list-style: none;
 }
 
 .image-container {
   text-align: center;
-}
-
-.image-container img {
-  width: 70%;
 }
 
 .movie-title-container {
