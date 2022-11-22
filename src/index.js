@@ -1,5 +1,8 @@
 import './styles.css';
-import { getTrendingMovies } from './api.js';
+import { getTrendingMovies, getGenres } from './api.js';
+
+const genres = document.querySelectorAll('.genres');
+const logo = document.querySelector('.logo');
 
 const displayMovies = async (list) => {
   const data = await list;
@@ -30,3 +33,23 @@ const displayMovies = async (list) => {
 document.addEventListener('DOMContentLoaded', () => {
   displayMovies(getTrendingMovies());
 });
+
+genres.forEach(item => {
+    item.addEventListener('click', () => {
+        switch(item.id) {
+            case 'action':
+                displayMovies(getGenres(28));
+              break;
+            case 'comedy':
+                displayMovies(getGenres(35));
+              break;
+              case 'animation':
+                displayMovies(getGenres(16));
+              break;
+          }
+    })
+});
+
+logo.addEventListener('click', () => {
+    displayMovies(getTrendingMovies());
+}) 

@@ -30,6 +30,7 @@ nav {
 
 .logo {
   font-size: 70px;
+  cursor: pointer;
 }
 
 nav ul {
@@ -40,6 +41,10 @@ nav ul {
 nav li {
   display: inline-block;
   margin-left: 100px;
+}
+
+.genres {
+  cursor: pointer;
 }
 
 .movies-list {
