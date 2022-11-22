@@ -12,7 +12,6 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-
 .container {
   max-width: 85%;
   margin: 0 auto;
@@ -37,4 +36,50 @@ nav ul {
 nav li {
   display: inline-block;
   margin-left: 100px;
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 200px;
+  width: 100%;
+  list-style: none;
+}
+
+.image-container {
+  text-align: center;
+}
+
+.image-container img {
+  width: 70%;
+}
+
+.movie-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 15px 0;
+}
+
+.like-btn {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  cursor: pointer;
+}
+
+.comments-btn {
+  padding: 7px;
+  background-color: transparent;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.comments-btn:hover {
+  background-color: #000;
+  color: white;
 }
