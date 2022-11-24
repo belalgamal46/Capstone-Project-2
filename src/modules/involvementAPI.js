@@ -13,13 +13,15 @@ export const getLikes = async () => {
 
 export const createLikes = async (id) => {
   try {
-    return await fetch(`${baseUrl}/apps/${likesListId}/likes/`, {
+    const response = await fetch(`${baseUrl}/apps/${likesListId}/likes/`, {
       method: 'POST',
       body: JSON.stringify({ item_id: id }),
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
     });
+
+    return response.text();
   } catch (error) {
     return error;
   }

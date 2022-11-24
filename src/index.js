@@ -1,25 +1,21 @@
 import './styles.css';
 
-import { getTrendingMovies, getGenres } from './modules/api.js';
-import { getLikes } from './modules/involvementAPI.js';
-import popup from './module/popup.js';
+import { getTrendingMovies, getGenres } from './modules/moviesApi.js';
+import LikesManager from './modules/likesManager.js';
+import popup from './modules/popup.js';
 
 const genres = document.querySelectorAll('.genres');
 const logo = document.querySelector('.logo');
 const moviesList = document.querySelector('.movies-list');
 const popupElement = document.querySelector('.popup-wrapper');
 
-const getMovielikesData = async () => {
-  const likesData = await getLikes();
-  return likesData.reduce((prev, curr) => ({ ...prev, [curr.item_id]: curr }), {});
-};
-
 const displayMovies = async (list, title = '') => {
-  const categoryTitle = document.querySelector('.title');
-  categoryTitle.innerHTML = title;
-  moviesList.innerHTML = '';
   const data = await list;
-  const likesDataObject = await getMovielikesData();
+  const categoryTitle = document.querySelector('.title');
+  categoryTitle.innerHTML = `${title} (${data.length})`;
+  moviesList.innerHTML = '';
+
+  const likesDataObject = await LikesManager.getMovielikesData();
 
   data.forEach((movie) => {
     const li = document.createElement('li');
@@ -44,13 +40,18 @@ const displayMovies = async (list, title = '') => {
       <div>
         <div class="movie-title-container">
           <h2>${movie.name || movie.title}</h2>
-          <button type="button" class="like-btn">
-            <span class="material-symbols-outlined"> favorite </span>
-            <span>${likesDataObject[movie.id]?.likes || 0} likes</span>
+          <button class="like-btn" type="button">
+            <span class="material-symbols-outlined solid">
+              favorite
+            </span>
+            <span id="p${movie.id}-likes-count">
+              ${likesDataObject[movie.id]?.likes || 0} likes
+            </span>
           </button>
         </div>
-        
-      </div>`;
+      </div>
+      `;
+
     li.appendChild(div);
     moviesList.appendChild(li);
   });
@@ -84,9 +85,27 @@ logo.addEventListener('click', () => {
 
 popupElement.addEventListener('click', (e) => {
   if (
-    e.target.classList.contains('material-symbols-outlined')
-    || e.target.classList.contains('popup-wrapper')
+    e.target.classList.contains('material-symbols-outlined') ||
+    e.target.classList.contains('popup-wrapper')
   ) {
     popupElement.classList.add('hide');
+  }
+});
+
+moviesList.addEventListener('click', (event) => {
+  if (
+    event.target.parentElement.nodeName === 'BUTTON' ||
+    event.target.classList.contains('like-btn')
+  ) {
+    Array.from(moviesList.children).forEach(async (child) => {
+      if (event.target.closest('.movie-item').id === child.id) {
+        const likesCount = document.querySelector(`#p${child.id}-likes-count`);
+        const count = parseInt(likesCount.innerText.split(' ')[0], 10) + 1;
+
+        likesCount.innerHTML = `${count} likes`;
+
+        await LikesManager.createMovieLikes(parseInt(child.id, 10));
+      }
+    });
   }
 });

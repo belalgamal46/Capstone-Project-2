@@ -1,4 +1,4 @@
-import { getMovieWithId } from './api.js';
+import { getMovieWithId } from './moviesApi.js';
 
 const popupElement = document.querySelector('.popup-wrapper');
 const popup = async (id) => {
