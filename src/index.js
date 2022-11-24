@@ -84,8 +84,8 @@ logo.addEventListener('click', () => {
 
 popupElement.addEventListener('click', (e) => {
   if (
-    e.target.classList.contains('material-symbols-outlined') ||
-    e.target.classList.contains('popup-wrapper')
+    e.target.classList.contains('material-symbols-outlined')
+    || e.target.classList.contains('popup-wrapper')
   ) {
     popupElement.classList.add('hide');
   }
