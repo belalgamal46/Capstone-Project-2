@@ -154,6 +154,21 @@ nav li {
   display: block;
 }
 
+.comment-form input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.comment-form button {
+  padding: 8px;
+}
+
+.comment-section {
+  margin-bottom: 20px;
+}
+
 .hide {
   display: none;
 }
