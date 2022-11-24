@@ -32,12 +32,10 @@ const displayMovies = async (list, title = '') => {
     button.className = 'comments-btn';
     button.textContent = 'Comments';
     button.id = movie.id;
-
+    div.appendChild(button);
     button.addEventListener('click', () => {
       popup(button.id);
     });
-
-    div.appendChild(button);
 
     li.innerHTML = `
       <div class="image-container">
@@ -53,6 +51,7 @@ const displayMovies = async (list, title = '') => {
         </div>
         
       </div>`;
+    li.appendChild(div);
     moviesList.appendChild(li);
   });
 };
@@ -85,8 +84,8 @@ logo.addEventListener('click', () => {
 
 popupElement.addEventListener('click', (e) => {
   if (
-    e.target.classList.contains('material-symbols-outlined')
-    || e.target.classList.contains('popup-wrapper')
+    e.target.classList.contains('material-symbols-outlined') ||
+    e.target.classList.contains('popup-wrapper')
   ) {
     popupElement.classList.add('hide');
   }
