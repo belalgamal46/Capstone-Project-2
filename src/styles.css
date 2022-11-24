@@ -117,7 +117,6 @@ nav li {
 
 .popup {
   background-color: white;
-  width: 500px;
   max-width: 80%;
   margin: 10px auto;
   padding: 30px;
@@ -125,16 +124,13 @@ nav li {
 }
 
 .popup-img {
-  width: 100%;
   text-align: center;
   height: 400px;
-  max-width: 100%;
   margin: 0 auto;
 }
 
 .popup-close {
   text-align: right;
-  width: 500px;
   max-width: 80%;
   margin: 30px auto 0 auto;
   color: white;
@@ -142,7 +138,7 @@ nav li {
 }
 
 .popup-img img {
-  width: 100%;
+  width: auto;
   height: inherit;
 }
 
