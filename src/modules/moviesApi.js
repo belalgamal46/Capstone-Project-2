@@ -14,7 +14,7 @@ export const getTrendingMovies = async () => {
 export const getGenres = async (id) => {
   try {
     const data = await fetch(
-      `${baseUrl}/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_genres=${id}&with_watch_monetization_types=flatrate`,
+      `https://api.themoviedb.org/3/discover/movie?api_key=4de7975ef400d300ae019f76c489bf9f&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_genres=${id}&with_watch_monetization_types=flatrate`,
     );
     const res = await data.json();
     return res.results;
