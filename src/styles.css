@@ -50,10 +50,17 @@ nav li {
 .movies-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 40px 20px;
   width: 100%;
   margin-top: 50px;
   list-style: none;
+}
+
+.movie-item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  justify-content: space-between;
 }
 
 .image-container {
@@ -64,7 +71,7 @@ nav li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0 15px 0;
+  margin-bottom: 15px;
 }
 
 .movie-title-container h2 {
@@ -153,4 +160,18 @@ nav li {
 
 .hide {
   display: none;
+}
+
+/* -------------------- Footer -------------------- */
+footer {
+  background-color: black;
+  width: 100%;
+  padding: 50px 0;
+  margin-top: 20px;
+}
+
+footer p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
 }
