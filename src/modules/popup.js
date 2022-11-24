@@ -1,5 +1,6 @@
 import { getMovieWithId } from './api.js';
 import { createComments, getComments } from './involvementAPI.js';
+import commentCounter from './commentsCounter.js';
 
 const popupElement = document.querySelector('.popup-wrapper');
 
@@ -42,7 +43,9 @@ const popup = async (id) => {
   const commentSection = document.createElement('div');
   commentSection.className = 'comment-section';
   const commentHeader = document.createElement('h2');
-  commentHeader.textContent = `Comments(${comments.length || 0})`;
+
+  const numberOfComments = commentCounter(comments);
+  commentHeader.textContent = `Comments(${numberOfComments || 0})`;
   commentSection.appendChild(commentHeader);
 
   const displayComments = (comments) => {
@@ -70,7 +73,8 @@ const popup = async (id) => {
     commentForm.reset();
     commentSection.innerHTML = '';
     commentSection.appendChild(commentHeader);
-    commentHeader.textContent = `Comments(${comments.length || 0})`;
+    const numberOfComments = commentCounter(comments);
+    commentHeader.textContent = `Comments(${numberOfComments || 0})`;
     displayComments(comments);
   });
 
