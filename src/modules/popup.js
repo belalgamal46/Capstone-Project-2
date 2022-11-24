@@ -1,4 +1,4 @@
-import { getMovieWithId } from './api.js';
+import { getMovieWithId } from './moviesApi.js';
 import { createComments, getComments } from './involvementAPI.js';
 import commentCounter from './commentsCounter.js';
 
