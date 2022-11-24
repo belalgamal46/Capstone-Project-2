@@ -22,3 +22,13 @@ export const getGenres = async (id) => {
     return error;
   }
 };
+
+export const getMovieWithId = async (id) => {
+  try {
+    const data = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=4de7975ef400d300ae019f76c489bf9f&language=en-US`);
+    const response = await data.json();
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

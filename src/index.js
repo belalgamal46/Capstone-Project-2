@@ -2,7 +2,7 @@ import './styles.css';
 
 import { getTrendingMovies, getGenres } from './modules/api.js';
 import { getLikes } from './modules/involvementAPI.js';
-import popup from './module/popup.js';
+import popup from './modules/popup.js';
 
 const genres = document.querySelectorAll('.genres');
 const logo = document.querySelector('.logo');
