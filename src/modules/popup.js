@@ -1,6 +1,9 @@
 import { getMovieWithId } from './moviesApi.js';
+import { createComments, getComments } from './involvementAPI.js';
+import commentCounter from './commentsCounter.js';
 
 const popupElement = document.querySelector('.popup-wrapper');
+
 const popup = async (id) => {
   const data = await getMovieWithId(id);
   popupElement.innerHTML = '';
@@ -11,12 +14,79 @@ const popup = async (id) => {
   closePopup.innerHTML = '<span class="material-symbols-outlined">close</span>';
   popupElement.appendChild(closePopup);
 
+  const commentForm = document.createElement('form');
+  commentForm.className = 'comment-form';
+  const formIntro = document.createElement('h2');
+  formIntro.textContent = 'Add a comment';
+  commentForm.appendChild(formIntro);
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.placeholder = 'Your name';
+  nameInput.id = 'user-name';
+  commentForm.appendChild(nameInput);
+
+  const commentInput = document.createElement('input');
+  commentInput.type = 'text';
+  commentInput.placeholder = 'Your insights';
+  commentInput.id = 'user-comment';
+  commentForm.appendChild(commentInput);
+
+  const commentbtn = document.createElement('button');
+  commentbtn.type = 'submit';
+  commentbtn.textContent = 'COMMENT';
+  commentbtn.id = 'comment-btm';
+  commentForm.appendChild(commentbtn);
+
+  const comments = await getComments(id);
+
+  const commentSection = document.createElement('div');
+  commentSection.className = 'comment-section';
+  const commentHeader = document.createElement('h2');
+
+  const numberOfComments = commentCounter(comments);
+  commentHeader.textContent = `Comments(${numberOfComments || 0})`;
+  commentSection.appendChild(commentHeader);
+
+  const displayComments = (comments) => {
+    if (comments.length) {
+      comments.forEach((comment) => {
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comments-container';
+        commentDiv.innerHTML = '';
+        commentDiv.innerHTML = `
+      <span>${comment.creation_date}</span>
+      <span>${comment.username}:</span>
+      <span>${comment.comment}</span>
+      `;
+        commentSection.appendChild(commentDiv);
+      });
+    }
+  };
+
+  displayComments(comments);
+
+  commentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await createComments(id, nameInput.value, commentInput.value);
+    const comments = await getComments(id);
+    commentForm.reset();
+    commentSection.innerHTML = '';
+    commentSection.appendChild(commentHeader);
+    const numberOfComments = commentCounter(comments);
+    commentHeader.textContent = `Comments(${numberOfComments || 0})`;
+    displayComments(comments);
+  });
+
   const mainPopup = document.createElement('div');
   mainPopup.classList = 'popup';
-  mainPopup.innerHTML = `<div class="popup-img">
-    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="poster" />
+  mainPopup.innerHTML = `
+  <div>
+    <div class="popup-img">
+      <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="poster" />
+    </div>
+    <h1 class="popup-title">${data.original_title}</h1>  
   </div>
-  <h1 class="popup-title">${data.original_title}</h1>
   <div>
     <p class="description">
       ${data.overview}
@@ -26,8 +96,11 @@ const popup = async (id) => {
       <span class="material-symbols-outlined rate">grade</span>
       <span>${data.vote_average}</span>
     </div>
-  </div>`;
-
+  </div>
+  <br>
+  `;
+  mainPopup.appendChild(commentSection);
+  mainPopup.appendChild(commentForm);
   popupElement.appendChild(mainPopup);
 };
 
