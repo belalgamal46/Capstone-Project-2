@@ -1,9 +1,8 @@
 import './styles.css';
 
 import { getTrendingMovies, getGenres } from './modules/api.js';
-import { getLikes, createLikes } from './modules/involvementAPI.js';
+import { getLikes } from './modules/involvementAPI.js';
 import popup from './module/popup.js';
-
 
 const genres = document.querySelectorAll('.genres');
 const logo = document.querySelector('.logo');
@@ -15,43 +14,41 @@ const getMovielikesData = async () => {
   return likesData.reduce((prev, curr) => ({ ...prev, [curr.item_id]: curr }), {});
 };
 
-const moviesList = document.querySelector('.movies-list');
-
 const displayMovies = async (list, title = '') => {
-
   const categoryTitle = document.querySelector('.title');
   categoryTitle.innerHTML = title;
   moviesList.innerHTML = '';
   const data = await list;
   const likesDataObject = await getMovielikesData();
-  
-   const div = document.createElement('div');
+
+  data.forEach((movie) => {
+    const li = document.createElement('li');
+    li.classList.add('movie-item');
+    li.id = movie.id;
+
+    const div = document.createElement('div');
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'comments-btn';
     button.textContent = 'Comments';
-    button.id = id;
+    button.id = movie.id;
 
     button.addEventListener('click', () => {
       popup(button.id);
     });
 
     div.appendChild(button);
-  
-  data.forEach(({ poster_path, name, title, id }) => {
-    const li = document.createElement('li');
-    li.classList.add('movie-item');
-    li.id = id;
+
     li.innerHTML = `
       <div class="image-container">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="poster" />
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="poster" />
       </div>
       <div>
         <div class="movie-title-container">
-          <h2>${name || title}</h2>
+          <h2>${movie.name || movie.title}</h2>
           <button type="button" class="like-btn">
             <span class="material-symbols-outlined"> favorite </span>
-            <span>${likesDataObject[id]?.likes || 0} likes</span>
+            <span>${likesDataObject[movie.id]?.likes || 0} likes</span>
           </button>
         </div>
         
@@ -87,7 +84,10 @@ logo.addEventListener('click', () => {
 });
 
 popupElement.addEventListener('click', (e) => {
-  if (e.target.classList.contains('material-symbols-outlined') || e.target.classList.contains('popup-wrapper')) {
+  if (
+    e.target.classList.contains('material-symbols-outlined')
+    || e.target.classList.contains('popup-wrapper')
+  ) {
     popupElement.classList.add('hide');
   }
 });

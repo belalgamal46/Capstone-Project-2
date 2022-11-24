@@ -13,7 +13,7 @@ export const getLikes = async () => {
 
 export const createLikes = async (id) => {
   try {
-    await fetch(`${baseUrl}/apps/${likesListId}/likes/`, {
+    return await fetch(`${baseUrl}/apps/${likesListId}/likes/`, {
       method: 'POST',
       body: JSON.stringify({ item_id: id }),
       headers: {
