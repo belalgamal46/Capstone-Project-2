@@ -1,9 +1,14 @@
 import './styles.css';
+
 import { getTrendingMovies, getGenres } from './modules/api.js';
 import { getLikes, createLikes } from './modules/involvementAPI.js';
+import popup from './module/popup.js';
+
 
 const genres = document.querySelectorAll('.genres');
 const logo = document.querySelector('.logo');
+const moviesList = document.querySelector('.movies-list');
+const popupElement = document.querySelector('.popup-wrapper');
 
 const getMovielikesData = async () => {
   const likesData = await getLikes();
@@ -13,12 +18,27 @@ const getMovielikesData = async () => {
 const moviesList = document.querySelector('.movies-list');
 
 const displayMovies = async (list, title = '') => {
+
   const categoryTitle = document.querySelector('.title');
   categoryTitle.innerHTML = title;
   moviesList.innerHTML = '';
   const data = await list;
   const likesDataObject = await getMovielikesData();
-  data.forEach(async ({ poster_path, name, title, id }) => {
+  
+   const div = document.createElement('div');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'comments-btn';
+    button.textContent = 'Comments';
+    button.id = id;
+
+    button.addEventListener('click', () => {
+      popup(button.id);
+    });
+
+    div.appendChild(button);
+  
+  data.forEach(({ poster_path, name, title, id }) => {
     const li = document.createElement('li');
     li.classList.add('movie-item');
     li.id = id;
@@ -34,9 +54,7 @@ const displayMovies = async (list, title = '') => {
             <span>${likesDataObject[id]?.likes || 0} likes</span>
           </button>
         </div>
-        <div>
-          <button type="button" class="comments-btn">Comments</button>
-        </div>
+        
       </div>`;
     moviesList.appendChild(li);
   });
@@ -66,4 +84,10 @@ genres.forEach((item) => {
 
 logo.addEventListener('click', () => {
   displayMovies(getTrendingMovies(), 'Trending');
+});
+
+popupElement.addEventListener('click', (e) => {
+  if (e.target.classList.contains('material-symbols-outlined') || e.target.classList.contains('popup-wrapper')) {
+    popupElement.classList.add('hide');
+  }
 });

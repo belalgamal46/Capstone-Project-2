@@ -105,6 +105,64 @@ nav li {
   font-size: 2.5rem;
 }
 
+.popup-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(95, 95, 114, 0.9);
+  overflow: scroll;
+}
+
+.popup {
+  background-color: white;
+  width: 500px;
+  max-width: 80%;
+  margin: 10px auto;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.popup-img {
+  width: 100%;
+  text-align: center;
+  height: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.popup-close {
+  text-align: right;
+  width: 500px;
+  max-width: 80%;
+  margin: 30px auto 0 auto;
+  color: white;
+  cursor: pointer;
+}
+
+.popup-img img {
+  width: 100%;
+  height: inherit;
+}
+
+.rate {
+  color: gold;
+}
+
+.rating {
+  display: flex;
+}
+
+.rating span {
+  display: block;
+}
+
+.hide {
+  display: none;
+
+}
+
 /* -------------------- Footer -------------------- */
 footer {
   background-color: black;
@@ -117,4 +175,3 @@ footer p {
   font-size: 1rem;
   font-weight: 700;
   color: white;
-}
