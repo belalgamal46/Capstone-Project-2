@@ -85,8 +85,8 @@ logo.addEventListener('click', () => {
 
 popupElement.addEventListener('click', (e) => {
   if (
-    e.target.classList.contains('material-symbols-outlined') ||
-    e.target.classList.contains('popup-wrapper')
+    e.target.classList.contains('material-symbols-outlined')
+    || e.target.classList.contains('popup-wrapper')
   ) {
     popupElement.classList.add('hide');
   }
@@ -94,8 +94,8 @@ popupElement.addEventListener('click', (e) => {
 
 moviesList.addEventListener('click', (event) => {
   if (
-    event.target.parentElement.nodeName === 'BUTTON' ||
-    event.target.classList.contains('like-btn')
+    event.target.parentElement.nodeName === 'BUTTON'
+    || event.target.classList.contains('like-btn')
   ) {
     Array.from(moviesList.children).forEach(async (child) => {
       if (event.target.closest('.movie-item').id === child.id) {
