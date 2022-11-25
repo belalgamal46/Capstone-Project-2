@@ -54,7 +54,6 @@ const displayMovies = async (list, title = '') => {
     likeBtnDiv.appendChild(movieTitleContainer);
 
     likeBtn.addEventListener('click', () => {
-      console.log(movie.id);
       LikesManager.likesCounter(likesCount, movie.id);
     });
 
@@ -97,8 +96,8 @@ logo.addEventListener('click', () => {
 
 popupElement.addEventListener('click', (e) => {
   if (
-    e.target.classList.contains('material-symbols-outlined') ||
-    e.target.classList.contains('popup-wrapper')
+    e.target.classList.contains('material-symbols-outlined')
+    || e.target.classList.contains('popup-wrapper')
   ) {
     popupElement.classList.add('hide');
   }
