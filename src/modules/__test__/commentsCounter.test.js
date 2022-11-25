@@ -20,4 +20,20 @@ describe('Testing comments', () => {
     const list = document.querySelector('.comments-section').children;
     expect(commentCounter(list)).toBe(2);
   });
+
+  test('should return zero if comment are zero', () => {
+    document.body.innerHTML = `
+      <div class="comments-section"></div>
+    `;
+
+    const list = document.querySelector('.comments-section').children;
+
+    expect(commentCounter(list)).toBe(0);
+  });
+
+  test('should return error if data type is not an array', () => {
+    expect(() => commentCounter('belal')).toThrowError();
+    expect(() => commentCounter({ 1: 1 })).toThrowError();
+    expect(() => commentCounter(1)).toThrowError();
+  });
 });

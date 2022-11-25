@@ -30,8 +30,9 @@ const displayMovies = async (list, title = '') => {
     button.textContent = 'Comments';
     button.id = movie.id;
     div.appendChild(button);
+
     button.addEventListener('click', () => {
-      popup(button.id);
+      popup(button.id, movie);
     });
 
     const likeBtnDiv = document.createElement('div');

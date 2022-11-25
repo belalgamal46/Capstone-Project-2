@@ -4,7 +4,7 @@ import commentCounter from './commentsCounter.js';
 
 const popupElement = document.querySelector('.popup-wrapper');
 
-const popup = async (id) => {
+const popup = async (id, movie) => {
   const data = await getMovieWithId(id);
   popupElement.innerHTML = '';
   popupElement.classList.remove('hide');
@@ -83,18 +83,20 @@ const popup = async (id) => {
   mainPopup.innerHTML = `
   <div>
     <div class="popup-img">
-      <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="poster" />
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="poster" />
     </div>
-    <h1 class="popup-title">${data.original_title}</h1>  
+    <h1 class="popup-title">${movie.title || movie.name}</h1>  
   </div>
   <div>
     <p class="description">
-      ${data.overview}
+      ${!data.overview ? movie.overview : data.overview}
     </p>
-    <p>Release Date: ${data.release_date}</p>
+    <p>Release Date: ${
+  !data.release_date ? movie.release_date || movie.first_air_date : data.release_date
+}</p>
     <div class="rating">
       <span class="material-symbols-outlined rate">grade</span>
-      <span>${data.vote_average}</span>
+      <span>${!data.vote_average ? movie.vote_average : data.vote_average}</span>
     </div>
   </div>
   <br>
