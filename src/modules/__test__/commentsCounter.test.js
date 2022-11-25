@@ -31,9 +31,4 @@ describe('Testing comments', () => {
     expect(commentCounter(list)).toBe(0);
   });
 
-  test('should return error if data type is not an array', () => {
-    expect(() => commentCounter('belal')).toThrowError();
-    expect(() => commentCounter({ 1: 1 })).toThrowError();
-    expect(() => commentCounter(1)).toThrowError();
-  });
 });
