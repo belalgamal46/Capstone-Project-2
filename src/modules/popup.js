@@ -55,9 +55,9 @@ const popup = async (id) => {
         commentDiv.className = 'comments-container';
         commentDiv.innerHTML = '';
         commentDiv.innerHTML = `
-      <span>${comment.creation_date}</span>
-      <span>${comment.username}:</span>
-      <span>${comment.comment}</span>
+      <span class="comment-date">${comment.creation_date}</span>
+      <span class="username">${comment.username}:</span>
+      <span class="comment-text">${comment.comment}</span>
       `;
         commentSection.appendChild(commentDiv);
       });
