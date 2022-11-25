@@ -32,25 +32,18 @@ nav {
   align-items: center;
 }
 
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
 .logo {
   font-size: 70px;
   cursor: pointer;
   color: white;
-
-  /* animation: logo 1.25s infinite; */
 }
-
-/* @keyframes logo {
-  0% {
-    rotate: 0deg;
-  }
-  50% {
-    rotate: 20deg;
-  }
-  100% {
-    rotate: -20deg;
-  }
-} */
 
 nav ul {
   display: flex;
