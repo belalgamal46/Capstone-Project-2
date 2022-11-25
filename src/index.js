@@ -33,26 +33,38 @@ const displayMovies = async (list, title = '') => {
       popup(button.id);
     });
 
+    const likeBtnDiv = document.createElement('div');
+    const movieTitleContainer = document.createElement('div');
+    const title = document.createElement('h2');
+    const likeBtn = document.createElement('button');
+    const heartIcon = document.createElement('span');
+    const likesCount = document.createElement('span');
+
+    movieTitleContainer.classList.add('movie-title-container');
+    title.innerHTML = `${movie.name || movie.title}`;
+    likeBtn.classList.add('like-btn');
+    likeBtn.type = 'button';
+    heartIcon.classList.add('material-symbols-outlined', 'favorite');
+    heartIcon.innerHTML = 'favorite';
+    likesCount.id = `p${movie.id}`;
+    likesCount.innerHTML = `${likesDataObject[movie.id]?.likes || 0} likes`;
+
+    likeBtn.append(heartIcon, likesCount);
+    movieTitleContainer.append(title, likeBtn);
+    likeBtnDiv.appendChild(movieTitleContainer);
+
+    likeBtn.addEventListener('click', () => {
+      console.log(movie.id);
+      LikesManager.likesCounter(likesCount, movie.id);
+    });
+
     li.innerHTML = `
       <div class="image-container">
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="poster" />
       </div>
-      <div>
-        <div class="movie-title-container">
-          <h2>${movie.name || movie.title}</h2>
-          <button class="like-btn" type="button">
-          <span class="material-symbols-outlined favorite">
-          favorite
-          </span>
-            <span id="p${movie.id}-likes-count">
-              ${likesDataObject[movie.id]?.likes || 0} likes
-            </span>
-          </button>
-        </div>
-      </div>
       `;
 
-    li.appendChild(div);
+    li.append(likeBtnDiv, div);
     moviesList.appendChild(li);
   });
 };
@@ -85,27 +97,9 @@ logo.addEventListener('click', () => {
 
 popupElement.addEventListener('click', (e) => {
   if (
-    e.target.classList.contains('material-symbols-outlined')
-    || e.target.classList.contains('popup-wrapper')
+    e.target.classList.contains('material-symbols-outlined') ||
+    e.target.classList.contains('popup-wrapper')
   ) {
     popupElement.classList.add('hide');
-  }
-});
-
-moviesList.addEventListener('click', (event) => {
-  if (
-    event.target.parentElement.nodeName === 'BUTTON'
-    || event.target.classList.contains('like-btn')
-  ) {
-    Array.from(moviesList.children).forEach(async (child) => {
-      if (event.target.closest('.movie-item').id === child.id) {
-        const likesCount = document.querySelector(`#p${child.id}-likes-count`);
-        const count = parseInt(likesCount.innerText.split(' ')[0], 10) + 1;
-
-        likesCount.innerHTML = `${count} likes`;
-
-        await LikesManager.createMovieLikes(parseInt(child.id, 10));
-      }
-    });
   }
 });
