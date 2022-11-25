@@ -3,6 +3,7 @@ import './styles.css';
 import { getTrendingMovies, getGenres } from './modules/moviesApi.js';
 import LikesManager from './modules/likesManager.js';
 import popup from './modules/popup.js';
+import moviesCounter from './modules/moviesCounter.js';
 
 const genres = document.querySelectorAll('.genres');
 const logo = document.querySelector('.logo');
@@ -12,7 +13,7 @@ const popupElement = document.querySelector('.popup-wrapper');
 const displayMovies = async (list, title = '') => {
   const data = await list;
   const categoryTitle = document.querySelector('.title');
-  categoryTitle.innerHTML = `${title} (${data.length})`;
+  categoryTitle.innerHTML = `${title} (${moviesCounter(data)})`;
   moviesList.innerHTML = '';
 
   const likesDataObject = await LikesManager.getMovielikesData();
