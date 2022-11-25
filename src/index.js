@@ -41,9 +41,9 @@ const displayMovies = async (list, title = '') => {
         <div class="movie-title-container">
           <h2>${movie.name || movie.title}</h2>
           <button class="like-btn" type="button">
-            <span class="material-symbols-outlined solid">
-              favorite
-            </span>
+          <span class="material-symbols-outlined favorite">
+          favorite
+          </span>
             <span id="p${movie.id}-likes-count">
               ${likesDataObject[movie.id]?.likes || 0} likes
             </span>
