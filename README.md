@@ -64,7 +64,12 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 - open you terminal
-- paste in terminal: git clone `https://github.com/linushaddai99/Capstone-Project-2.git`
+- paste in terminal:
+
+```
+git clone https://github.com/belalgamal46/Capstone-Project-2
+```
+
 - cd Capstone-Project-2
 - code .
 - run npm install
